@@ -329,7 +329,7 @@ class OrdinalEncoder(BaseEstimator, TransformerMixin):
                 index = pd.Series(categories).fillna(nan_identity).unique()
                 mask = cnts >= min_group_size
 
-                data = pd.Series(index=index[mask], data=range(1, np.sum(mask) + 1), dtype=np.float64)
+                data = pd.Series(index=index[mask], data=range(1, np.sum(mask) + 1), dtype=object)
                 data = pd.concat([data, pd.Series(index=index[~mask], data=data.max() + 1)], axis=0)
 
                 if handle_missing == 'value' and ~data.index.isnull().any():
